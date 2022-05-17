@@ -75,7 +75,7 @@ public class MySqlCustomerModel implements CustomerModel{
         Customer customer = null;
         try {
             Connection connection = ConnectionHelper.getConnection();
-            String sqlQuery = "select * from students where status = ? and id = ?";
+            String sqlQuery = "select * from customers where status = ? and id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setInt(1, 1);
             preparedStatement.setString(2, id);
@@ -104,7 +104,7 @@ public class MySqlCustomerModel implements CustomerModel{
         try {
             Connection connection = ConnectionHelper.getConnection();
             String sqlQuery = "update customers " +
-                    "set id = ?, name = ?, phone = ?, image = ?, dob = ?, createdAt = ?, updatedAt = ?, status = ? where rollNumber = ?";
+                    "set id = ?, name = ?, phone = ?, image = ?, dob = ?, createdAt = ?, updatedAt = ?, status = ? where id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setString(1, updateCustomer.getId());
             preparedStatement.setString(2, updateCustomer.getName());

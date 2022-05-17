@@ -1,5 +1,7 @@
 package com.example.customermanagement.entity;
 
+import com.example.customermanagement.util.DateTimeHelper;
+
 import java.time.LocalDateTime;
 
 public class Customer {
@@ -35,6 +37,9 @@ public class Customer {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
         this.status =1;
+    }
+
+    public Customer(String id, String name, String phone, String image) {
     }
 
     @Override
@@ -113,5 +118,12 @@ public class Customer {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getDobString() {
+        if(this.dob != null){
+            return DateTimeHelper.convertLocalDateTimeToString(this.dob);
+        }
+        return "";
     }
 }
