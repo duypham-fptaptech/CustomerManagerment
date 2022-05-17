@@ -115,7 +115,7 @@ private static CustomerModel customerModel;
 
     private static void createNewCustomer() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter roll number");
+        System.out.println("Please enter id");
         String id = scanner.nextLine();
         System.out.println("Please enter full name");
         String name = scanner.nextLine();

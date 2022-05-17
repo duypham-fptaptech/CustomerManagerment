@@ -12,6 +12,11 @@ public class ConnectionHelper {
     public static Connection getConnection(){
         try {
             if(connection == null || connection.isClosed()){
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
                 connection = DriverManager.getConnection(CONNECTION_STRING, USERNAME, PASSWORD);
             }
         } catch (SQLException e) {
