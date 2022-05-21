@@ -1,4 +1,4 @@
-<%@ page import="com.example.customermanagement.entity.Customer" %>
+<%@ page import="com.example.customermanagement.entity.Product" %>
 <%@ page import="java.util.HashMap" %><%--
   Created by IntelliJ IDEA.
   User: hp
@@ -8,12 +8,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    Customer customer = (Customer) request.getAttribute("customer");
+    Product product = (Product) request.getAttribute("product");
     int action = (int) request.getAttribute("action");
     HashMap<String, String> errors = (HashMap<String, String>) request.getAttribute("errors");
-    String url = "/admin/customers/create";
+    String url = "/admin/products/create";
     if (action == 2) {
-        url = "/admin/customers/edit";
+        url = "/admin/products/edit";
     }
     if (errors == null) {
         errors = new HashMap<>();
@@ -22,7 +22,7 @@
 <html>
 <jsp:include page="../includes/head.jsp"></jsp:include>
 <head>
-    <title>Create new customer</title>
+    <title>Create new product</title>
 </head>
 <body>
 <div id="pcoded" class="pcoded">
@@ -66,15 +66,15 @@
                                             <!-- Basic Form Inputs card start -->
                                             <div class="card">
                                                 <div class="card-block">
-                                                    <h1>Create student</h1>
-                                                    <a href="/admin/customers/list">Back to list</a>
+                                                    <h1>Create product</h1>
+                                                    <a href="/admin/products/list">Back to list</a>
                                                     <form action="<%=url%>" method="post">
                                                         <div class="form-group row">
                                                             <div class="col-sm-5">
                                                                 <input type="text" name="id"
                                                                        placeholder="Please enter id"
                                                                        class="form-control form-control-round"
-                                                                       value="<%=customer.getId()%>" <%=action == 2 ? "readonly":""%>>
+                                                                       value="<%=product.getId()%>" <%=action == 2 ? "readonly":""%>>
                                                                 <%if (errors.containsKey("id")) {%>
                                                                 <span class="text-danger">* <%=errors.get("id")%></span>
                                                                 <%}%>
@@ -83,7 +83,7 @@
                                                                 <input type="text" name="name"
                                                                        placeholder="Please enter full name"
                                                                        class="form-control form-control-round"
-                                                                       value="<%=customer.getName()%>">
+                                                                       value="<%=product.getName()%>">
                                                                 <%if (errors.containsKey("name")) {%>
                                                                 <span class="text-danger">* <%=errors.get("name")%></span>
                                                                 <%}%>
@@ -91,33 +91,33 @@
                                                         </div>
                                                         <div class="form-group row">
                                                             <div class="col-sm-7">
-                                                                <input type="text" name="phone"
+                                                                <input type="text" name="image"
                                                                        placeholder="Please enter image"
                                                                        class="form-control form-control-round"
-                                                                       name="phone" value="<%=customer.getPhone()%>">
-                                                                <%if (errors.containsKey("phone")) {%>
-                                                                <span class="text-danger">* <%=errors.get("phone")%></span>
-                                                                <%}%>
-                                                            </div>
-                                                            <div class="col-sm-5">
-                                                                <input type="text" name="image"
-                                                                       placeholder="Please enter phone number"
-                                                                       class="form-control form-control-round"
-                                                                       value="<%=customer.getImage()%>">
+                                                                       name="phone" value="<%=product.getImage()%>">
                                                                 <%if (errors.containsKey("image")) {%>
                                                                 <span class="text-danger">* <%=errors.get("image")%></span>
                                                                 <%}%>
                                                             </div>
+                                                            <div class="col-sm-5">
+                                                                <input type="text" name="price"
+                                                                       placeholder="Please enter price"
+                                                                       class="form-control form-control-round"
+                                                                       value="<%=product.getPrice()%>">
+                                                                <%if (errors.containsKey("price")) {%>
+                                                                <span class="text-danger">* <%=errors.get("price")%></span>
+                                                                <%}%>
+                                                            </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <div class="col-sm-4" id="reservationdate"
-                                                                 data-target-input="nearest">
-                                                                <input type="date" name="birthday"
+                                                            <div class="col-sm-4">
+                                                                <input type="text" name="quantity"
+                                                                       placeholder="Please enter quantity"
                                                                        class="form-control form-control-round"
                                                                        data-target="#reservationdate"
-                                                                       value="<%=customer.getDob()%>">
-                                                                <%if (errors.containsKey("dob")) {%>
-                                                                <span class="text-danger">* <%=errors.get("dob")%></span>
+                                                                       value="<%=product.getQuantity()%>">
+                                                                <%if (errors.containsKey("quantity")) {%>
+                                                                <span class="text-danger">* <%=errors.get("quantity")%></span>
                                                                 <%}%>
                                                             </div>
                                                         </div>
@@ -142,12 +142,5 @@
     </div>
 </div>
 <jsp:include page="../includes/script.jsp"></jsp:include>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        $('#reservationdate').datetimepicker({
-            format: 'DD-MM-YYYY'
-        });
-    })
-</script>
 </body>
 </html>

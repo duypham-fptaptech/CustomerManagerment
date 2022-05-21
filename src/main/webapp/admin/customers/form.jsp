@@ -12,10 +12,10 @@
     int action = (int) request.getAttribute("action");
     HashMap<String, String> errors = (HashMap<String, String>) request.getAttribute("errors");
     String url = "/admin/customers/create";
-    if(action == 2){
+    if (action == 2) {
         url = "/admin/customers/edit";
     }
-    if(errors == null){
+    if (errors == null) {
         errors = new HashMap<>();
     }
 %>
@@ -41,7 +41,7 @@
                                 <!-- Page-header start -->
                                 <div class="page-body">
                                     <%
-                                        if(errors != null && errors.size() > 0){
+                                        if (errors != null && errors.size() > 0) {
                                     %>
                                     <div class="row">
                                         <div class="col-12">
@@ -49,9 +49,10 @@
                                                 <h5>Please fix error below</h5>
                                                 <ul>
                                                     <%
-                                                        for (String msg: errors.values()){
+                                                        for (String msg : errors.values()) {
                                                     %>
-                                                    <li class="text-danger"><%=msg%></li>
+                                                    <li class="text-danger"><%=msg%>
+                                                    </li>
                                                     <%
                                                         }
                                                     %>
@@ -65,53 +66,66 @@
                                             <!-- Basic Form Inputs card start -->
                                             <div class="card">
                                                 <div class="card-block">
-                                                    <h1>Create student</h1>
+                                                    <h1>Create customer</h1>
                                                     <a href="/admin/customers/list">Back to list</a>
                                                     <form action="<%=url%>" method="post">
                                                         <div class="form-group row">
                                                             <div class="col-sm-5">
-                                                                <input type="text" name="id" placeholder="Please enter id" class="form-control form-control-round"
+                                                                <input type="text" name="id"
+                                                                       placeholder="Please enter id"
+                                                                       class="form-control form-control-round"
                                                                        value="<%=customer.getId()%>" <%=action == 2 ? "readonly":""%>>
-                                                                <%if(errors.containsKey("id")){%>
+                                                                <%if (errors.containsKey("id")) {%>
                                                                 <span class="text-danger">* <%=errors.get("id")%></span>
                                                                 <%}%>
                                                             </div>
                                                             <div class="col-sm-7">
-                                                                <input type="text" name="name" placeholder="Please enter full name" class="form-control form-control-round"
+                                                                <input type="text" name="name"
+                                                                       placeholder="Please enter full name"
+                                                                       class="form-control form-control-round"
                                                                        value="<%=customer.getName()%>">
-                                                                <%if(errors.containsKey("name")){%>
+                                                                <%if (errors.containsKey("name")) {%>
                                                                 <span class="text-danger">* <%=errors.get("name")%></span>
                                                                 <%}%>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <div class="col-sm-7">
-                                                                <input type="text" name="phone" placeholder="Please enter image" class="form-control form-control-round"
+                                                                <input type="text" name="phone"
+                                                                       placeholder="Please enter image"
+                                                                       class="form-control form-control-round"
                                                                        name="phone" value="<%=customer.getPhone()%>">
-                                                                <%if(errors.containsKey("phone")){%>
+                                                                <%if (errors.containsKey("phone")) {%>
                                                                 <span class="text-danger">* <%=errors.get("phone")%></span>
                                                                 <%}%>
                                                             </div>
                                                             <div class="col-sm-5">
-                                                                <input type="text" name="image" placeholder="Please enter phone number" class="form-control form-control-round"
+                                                                <input type="text" name="image"
+                                                                       placeholder="Please enter phone number"
+                                                                       class="form-control form-control-round"
                                                                        value="<%=customer.getImage()%>">
-                                                                <%if(errors.containsKey("image")){%>
+                                                                <%if (errors.containsKey("image")) {%>
                                                                 <span class="text-danger">* <%=errors.get("image")%></span>
                                                                 <%}%>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <div class="col-sm-4">
-                                                                <input type="date" name="birthday" class="form-control form-control-round"
+                                                            <div class="col-sm-4" id="reservationdate"
+                                                                 data-target-input="nearest">
+                                                                <input type="date" name="dob"
+                                                                       class="form-control form-control-round"
+                                                                       data-target="#reservationdate"
                                                                        value="<%=customer.getDob()%>">
-                                                                <%if(errors.containsKey("birthday")){%>
-                                                                <span class="text-danger">* <%=errors.get("birthday")%></span>
+                                                                <%if (errors.containsKey("dob")) {%>
+                                                                <span class="text-danger">* <%=errors.get("dob")%></span>
                                                                 <%}%>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <input type="submit" class="btn btn-info btn-round" value="Submit">
-                                                            <input type="reset" class="btn btn-info btn-round" value="Reset">
+                                                            <input type="submit" class="btn btn-info btn-round"
+                                                                   value="Submit">
+                                                            <input type="reset" class="btn btn-info btn-round"
+                                                                   value="Reset">
                                                         </div>
                                                     </form>
                                                 </div>

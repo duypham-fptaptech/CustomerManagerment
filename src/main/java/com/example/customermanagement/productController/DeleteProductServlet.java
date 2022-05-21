@@ -1,8 +1,8 @@
 package com.example.customermanagement.productController;
 
-import com.t2010a.hellot2010aagain.entity.Student;
-import com.t2010a.hellot2010aagain.model.MySqlStudentModel;
-import com.t2010a.hellot2010aagain.model.StudentModel;
+import com.example.customermanagement.entity.Product;
+import com.example.customermanagement.productModel.MySqlProductModel;
+import com.example.customermanagement.productModel.ProductModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,28 +10,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class DeleteStudentServlet extends HttpServlet {
+public class DeleteProductServlet extends HttpServlet {
 
-    private StudentModel studentModel;
+    private ProductModel productModel;
 
-    public DeleteStudentServlet() {
-        this.studentModel = new MySqlStudentModel();
+    public DeleteProductServlet() {
+        this.productModel = new MySqlProductModel();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // lấy tham số rollNumber(id)
-        String rollNumber = req.getParameter("id");
+        String id = req.getParameter("id");
         // kiểm tra trong database xem có tồn tại không.
-        Student student = studentModel.findById(rollNumber);
+        Product product = productModel.findById(id);
         // nếu không trả về trang 404
-        if (student == null) {
-            req.setAttribute("message", "Student not found!");
+        if (product == null) {
+            req.setAttribute("message", "Product not found!");
             req.getRequestDispatcher("/admin/errors/404.jsp").forward(req, resp);
         } else {
-            boolean result = studentModel.delete(rollNumber); // xoá mềm.
+            boolean result = productModel.delete(id); // xoá mềm.
             if (result) {
-                resp.sendRedirect("/admin/students/list");
+                resp.sendRedirect("/admin/products/list");
             } else {
                 req.setAttribute("message", "Action fails!");
                 req.getRequestDispatcher("/admin/errors/500.jsp").forward(req, resp);

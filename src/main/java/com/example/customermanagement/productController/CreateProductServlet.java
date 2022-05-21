@@ -1,10 +1,8 @@
 package com.example.customermanagement.productController;
 
-import com.t2010a.hellot2010aagain.entity.Student;
-import com.t2010a.hellot2010aagain.model.MySqlStudentModel;
-import com.t2010a.hellot2010aagain.model.StudentModel;
-import com.t2010a.hellot2010aagain.util.DateTimeHelper;
-import com.t2010a.hellot2010aagain.util.ValidationUtil;
+import com.example.customermanagement.entity.Product;
+import com.example.customermanagement.productModel.MySqlProductModel;
+import com.example.customermanagement.productModel.ProductModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,64 +12,62 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
-public class CreateStudentServlet extends HttpServlet {
+public class CreateProductServlet extends HttpServlet {
 
-    private StudentModel studentModel;
+    private ProductModel productModel;
 
-    public CreateStudentServlet() {
-        this.studentModel = new MySqlStudentModel();
+    public CreateProductServlet() {
+        this.productModel = new MySqlProductModel();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // trả về form.
-        req.setAttribute("student", new Student());
+        req.setAttribute("product", new Product());
         req.setAttribute("action", 1);
-        req.getRequestDispatcher("/admin/students/form.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/products/form.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         // xử lý validate và save.
-        String rollNumber = req.getParameter("rollNumber");
-        String fullName = req.getParameter("fullName");
-        String email = req.getParameter("email");
-        String phone = req.getParameter("phone");
-        String stringBirthday = req.getParameter("birthday");
-        System.out.println(fullName);
-        Student student = new Student(rollNumber, fullName, email, phone);
+        String id = req.getParameter("id");
+        String name = req.getParameter("name");
+        String image = req.getParameter("image");
+        String price = req.getParameter("price");
+        String quantity = req.getParameter("quantity");
+        System.out.println(name);
+        Product product = new Product(id, name, image, price, quantity);
         HashMap<String, String> errors = new HashMap<>();
-        if (stringBirthday != null && stringBirthday.length() > 0) {
-            LocalDateTime birthday = DateTimeHelper.convertStringToLocalDateTime(stringBirthday);
-            student.setDob(birthday);
-        }
         // validate dữ liệu theo kiểu cùi bắp.
-        if (rollNumber == null || rollNumber.length() == 0) {
-            errors.put("rollNumber", "Please enter rollnumber");
+        if (id == null || id.length() == 0) {
+            errors.put("id", "Please enter id");
         }
-        if (fullName == null || fullName.length() == 0) {
-            errors.put("fullName", "Please enter fullname");
+        if (name == null || name.length() == 0) {
+            errors.put("name", "Please enter name");
         }
-        if (email == null || email.length() == 0) {
-            errors.put("email", "Please enter email");
-        } else if (!ValidationUtil.checkEmail(email)) {
-            errors.put("email", "Invalid email, please enter real email. For example: admin@gmail.com");
+        if (image == null || image.length() == 0) {
+            errors.put("image", "Please enter image");
         }
-        if (phone == null || phone.length() == 0) {
-            errors.put("phone", "Please enter phone");
+
+        if (price == null || price.length() == 0) {
+            errors.put("price", "Please enter price");
         }
+        if (quantity == null || quantity.length() == 0) {
+                errors.put("quantity", "Please enter quantity");
+            }
         if (errors.size() > 0) {
-            req.setAttribute("student", student);
+            req.setAttribute("product", product);
             req.setAttribute("action", 1);
             req.setAttribute("errors", errors);
-            req.getRequestDispatcher("/admin/students/form.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/products/form.jsp").forward(req, resp);
             return;
         }
-        if (studentModel.save(student) != null) {
-            resp.sendRedirect("/admin/students/list");
+        if (productModel.save(product) != null) {
+            resp.sendRedirect("/admin/products/list");
         } else {
-            req.getRequestDispatcher("/admin/students/form.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/products/form.jsp").forward(req, resp);
         }
-    }
+}
 }

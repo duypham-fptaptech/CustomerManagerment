@@ -1,10 +1,8 @@
-package com.example.customermanagement.model;
+package com.example.customermanagement.customerModel;
 
 import com.example.customermanagement.entity.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryCustomerModelTest {
 

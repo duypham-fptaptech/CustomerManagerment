@@ -1,4 +1,5 @@
-<%@ page import="com.example.customermanagement.entity.Customer" %><%--
+<%@ page import="com.example.customermanagement.entity.Customer" %>
+<%@ page import="com.example.customermanagement.entity.Product" %><%--
   Created by IntelliJ IDEA.
   User: hp
   Date: 5/14/2022
@@ -7,7 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    Customer customer = (Customer) request.getAttribute("customer");
+    Product product = (Product) request.getAttribute("product");
 %>
 <html>
 <jsp:include page="../includes/head.jsp"></jsp:include>
@@ -34,16 +35,16 @@
                                             <!-- Basic Form Inputs card start -->
                                             <div class="card">
                                                 <div class="card-block">
-                                                    <h1>Student detail</h1>
-                                                    <a href="/admin/customers/list">Back to list</a> &nbsp;
-                                                    <a href="/admin/customers/create">Create new customer</a>
+                                                    <h1>Product detail</h1>
+                                                    <a href="/admin/products/list">Back to list</a> &nbsp;
+                                                    <a href="/admin/products/create">Create new product</a>
                                                     <div class="form-group row">
                                                         <div class="col-sm-4">
                                                             <div class="form-control form-control-round">
-                                                                Id: <%=customer.getId()%>
+                                                                Id: <%=product.getId()%>
                                                             </div>
                                                             <div class="form-control form-control-round">
-                                                                Fullname: <%=customer.getName()%>
+                                                                Name: <%=product.getName()%>
                                                             </div>
                                                         </div>
                                                     </div>
