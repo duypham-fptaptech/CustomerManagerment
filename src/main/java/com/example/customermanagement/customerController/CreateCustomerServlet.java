@@ -36,7 +36,7 @@ public class CreateCustomerServlet extends HttpServlet {
         String name = req.getParameter("name");
         String image = req.getParameter("image");
         String phone = req.getParameter("phone");
-        String stringBirthday = req.getParameter("birthday");
+        String stringBirthday = req.getParameter("dob");
         System.out.println(name);
         Customer customer = new Customer(id, name, phone, image);
         HashMap<String, String> errors = new HashMap<>();
