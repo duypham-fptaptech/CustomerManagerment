@@ -20,7 +20,7 @@ class MySqlCustomerModelTest {
 
     @Test
     void save() {
-        model.save(new Customer("A002", "Van", "0234235232", "https://d1hjkbq40fs2x4.cloudfront.net/2016-01-31/files/1045.jpg", LocalDateTime.of(2004, 10, 10, 10, 10)));
+        model.save(new Customer("A005", "Nguyen", "02334535232", "https://d1hjkbq40fs2x4.cloudfront.net/2016-01-31/files/1045.jpg", LocalDateTime.of(2003, 5, 10, 10, 10)));
     }
 
     @Test
