@@ -1,40 +1,38 @@
 package com.example.customermanagement.productController;
 
-import com.t2010a.hellot2010aagain.entity.Student;
-import com.t2010a.hellot2010aagain.model.MySqlStudentModel;
-import com.t2010a.hellot2010aagain.model.StudentModel;
-import com.t2010a.hellot2010aagain.util.DateTimeHelper;
+import com.example.customermanagement.entity.Product;
+import com.example.customermanagement.productModel.MySqlProductModel;
+import com.example.customermanagement.productModel.ProductModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDateTime;
 
-public class EditStudentServlet extends HttpServlet {
+public class EditProductServlet extends HttpServlet {
 
-    private StudentModel studentModel;
+    private ProductModel productModel;
 
-    public EditStudentServlet() {
-        this.studentModel = new MySqlStudentModel();
+    public EditProductServlet() {
+        this.productModel = new MySqlProductModel();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // lấy tham số rollNumber(id)
-        String rollNumber = req.getParameter("id");
+        String id = req.getParameter("id");
         // kiểm tra trong database xem có tồn tại không.
-        Student student = studentModel.findById(rollNumber);
+        Product product = productModel.findById(id);
         // nếu không trả về trang 404
-        if (student == null) {
-            req.setAttribute("message", "Student not found!");
+        if (product == null) {
+            req.setAttribute("message", "Product not found!");
             req.getRequestDispatcher("/admin/errors/404.jsp").forward(req, resp);
         } else {
             // nếu có trả về trang detail
-            req.setAttribute("student", student);
+            req.setAttribute("product", product);
             req.setAttribute("action", 2);
-            req.getRequestDispatcher("/admin/students/form.jsp").forward(req, resp);
+            req.getRequestDispatcher("/admin/products/form.jsp").forward(req, resp);
         }
     }
 
@@ -42,27 +40,26 @@ public class EditStudentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         // xử lý validate và save.
-        String rollNumber = req.getParameter("rollNumber");
-        Student existingStudent = studentModel.findById(rollNumber);
-        if(existingStudent == null){
-            req.setAttribute("message", "Student not found!");
+        String id = req.getParameter("id");
+        Product existingProduct = productModel.findById(id);
+        if(existingProduct == null){
+            req.setAttribute("message", "Product not found!");
             req.getRequestDispatcher("/admin/errors/404.jsp").forward(req, resp);
         }else{
-            String fullName = req.getParameter("fullName");
-            String email = req.getParameter("email");
-            String phone = req.getParameter("phone");
-            String stringBirthday = req.getParameter("birthday");
-            System.out.println(fullName);
-            LocalDateTime birthday = DateTimeHelper.convertStringToLocalDateTime(stringBirthday);
-            Student student = new Student(rollNumber, fullName, email, phone, birthday);
+            String name = req.getParameter("name");
+            String image = req.getParameter("image");
+            String price = req.getParameter("price");
+            String quantity = req.getParameter("quantity");
+            System.out.println(name);
+            Product product = new Product(id, name, image, price, quantity);
             // validate dữ liệu
-            if (studentModel.update(rollNumber, student) != null) {
-                resp.sendRedirect("/admin/students/list");
+            if (productModel.update(id, product) != null) {
+                resp.sendRedirect("/admin/products/list");
             } else {
                 // nếu có trả về trang form
-                req.setAttribute("student", student);
+                req.setAttribute("product", product);
                 req.setAttribute("action", 2);
-                req.getRequestDispatcher("/admin/students/form.jsp").forward(req, resp);
+                req.getRequestDispatcher("/admin/products/form.jsp").forward(req, resp);
             }
         }
     }

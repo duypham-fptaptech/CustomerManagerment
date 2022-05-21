@@ -1,36 +1,39 @@
-package com.t2010a.hellot2010aagain.model;
+package com.example.customermanagement.productModel;
 
-import com.t2010a.hellot2010aagain.entity.Student;
-import com.t2010a.hellot2010aagain.util.ConnectionHelper;
+import com.example.customermanagement.entity.Product;
+import com.example.customermanagement.util.ConnectionHelper;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySqlStudentModel implements StudentModel {
+public class MySqlProductModel implements ProductModel {
 
     @Override
-    public Student save(Student student) {
+    public Product save(Product product) {
         try {
             Connection connection = ConnectionHelper.getConnection();
-            String sqlQuery = "insert into students " +
-                    "(rollNumber, fullName, email, phone, dob, createdAt, updatedAt, status) " +
+            String sqlQuery = "insert into products " +
+                    "(id, name, image, price, quantity, createdAt, updatedAt, status) " +
                     "values " +
                     "(?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-            preparedStatement.setString(1, student.getRollNumber());
-            preparedStatement.setString(2, student.getFullName());
-            preparedStatement.setString(3, student.getEmail());
-            preparedStatement.setString(4, student.getPhone());
-            preparedStatement.setString(5, student.getDob().toString());
-            preparedStatement.setString(6, student.getCreatedAt().toString());
-            preparedStatement.setString(7, student.getUpdatedAt().toString());
-            preparedStatement.setInt(8, student.getStatus());
+            preparedStatement.setString(1, product.getId());
+            preparedStatement.setString(2, product.getName());
+            preparedStatement.setString(3, product.getImage());
+            preparedStatement.setString(4, product.getPrice());
+            preparedStatement.setString(5, product.getQuantity());
+            preparedStatement.setString(6, product.getCreatedAt().toString());
+            preparedStatement.setString(7, product.getUpdatedAt().toString());
+            preparedStatement.setInt(8, product.getStatus());
             System.out.println("Connection success!");
             preparedStatement.execute();
-            return student;
+            return product;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -38,29 +41,28 @@ public class MySqlStudentModel implements StudentModel {
     }
 
     @Override
-    public List<Student> findAll() {
-        List<Student> list = new ArrayList<>();
+    public List<Product> findAll() {
+        List<Product> list = new ArrayList<>();
         try {
             Connection connection = ConnectionHelper.getConnection();
-            String sqlQuery = "select * from students where status = ?";
+            String sqlQuery = "select * from products where status = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setInt(1, 1);
             System.out.println("Connection success!");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                String rollNumber = resultSet.getString("rollNumber");
-                String fullName = resultSet.getString("fullName");
-                String email = resultSet.getString("email");
-                String phone = resultSet.getString("phone");
-                LocalDateTime dob =
-                        LocalDateTime.ofInstant(resultSet.getTimestamp("dob").toInstant(), ZoneId.systemDefault());
+                String id = resultSet.getString("id");
+                String name = resultSet.getString("name");
+                String image = resultSet.getString("image");
+                String price = resultSet.getString("price");
+                String quantity = resultSet.getString("quantity");
                 LocalDateTime createdAt =
                         LocalDateTime.ofInstant(resultSet.getTimestamp("createdAt").toInstant(), ZoneId.systemDefault());
                 LocalDateTime updatedAt =
                         LocalDateTime.ofInstant(resultSet.getTimestamp("updatedAt").toInstant(), ZoneId.systemDefault());
                 int status = resultSet.getInt("status");
-                Student student = new Student(rollNumber, fullName, email, phone, dob, createdAt, updatedAt, status);
-                list.add(student);
+                Product product = new Product(id, name, image, price, quantity, createdAt, updatedAt, status);
+                list.add(product);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -69,53 +71,52 @@ public class MySqlStudentModel implements StudentModel {
     }
 
     @Override
-    public Student findById(String rollNumber) {
-        Student student = null;
+    public Product findById(String id) {
+        Product product = null;
         try {
             Connection connection = ConnectionHelper.getConnection();
-            String sqlQuery = "select * from students where status = ? and rollNumber = ?";
+            String sqlQuery = "select * from products where status = ? and id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setInt(1, 1);
-            preparedStatement.setString(2, rollNumber);
+            preparedStatement.setString(2, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                String fullName = resultSet.getString("fullName");
-                String email = resultSet.getString("email");
-                String phone = resultSet.getString("phone");
-                LocalDateTime dob =
-                        LocalDateTime.ofInstant(resultSet.getTimestamp("dob").toInstant(), ZoneId.systemDefault());
+                String name = resultSet.getString("name");
+                String image = resultSet.getString("image");
+                String price = resultSet.getString("price");
+                String quantity = resultSet.getString("quantity");
                 LocalDateTime createdAt =
                         LocalDateTime.ofInstant(resultSet.getTimestamp("createdAt").toInstant(), ZoneId.systemDefault());
                 LocalDateTime updatedAt =
                         LocalDateTime.ofInstant(resultSet.getTimestamp("updatedAt").toInstant(), ZoneId.systemDefault());
                 int status = resultSet.getInt("status");
-                student = new Student(rollNumber, fullName, email, phone, dob, createdAt, updatedAt, status);
+                product = new Product(id, name, image, price, quantity, createdAt, updatedAt, status);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return student;
+        return product;
     }
 
     @Override
-    public Student update(String rollNumber, Student updateStudent) {
+    public Product update(String id, Product updateProduct) {
         try {
             Connection connection = ConnectionHelper.getConnection();
-            String sqlQuery = "update students " +
-                    "set rollNumber = ?, fullName = ?, email = ?, phone = ?, dob = ?, createdAt = ?, updatedAt = ?, status = ? where rollNumber = ?";
+            String sqlQuery = "update products " +
+                    "set id = ?, name = ?, image = ?, price = ?, quantity = ?, createdAt = ?, updatedAt = ?, status = ? where id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-            preparedStatement.setString(1, updateStudent.getRollNumber());
-            preparedStatement.setString(2, updateStudent.getFullName());
-            preparedStatement.setString(3, updateStudent.getEmail());
-            preparedStatement.setString(4, updateStudent.getPhone());
-            preparedStatement.setString(5, updateStudent.getDob().toString());
-            preparedStatement.setString(6, updateStudent.getCreatedAt().toString());
-            preparedStatement.setString(7, updateStudent.getUpdatedAt().toString());
-            preparedStatement.setInt(8, updateStudent.getStatus());
-            preparedStatement.setString(9, rollNumber);
+            preparedStatement.setString(1, updateProduct.getId());
+            preparedStatement.setString(2, updateProduct.getName());
+            preparedStatement.setString(3, updateProduct.getImage());
+            preparedStatement.setString(4, updateProduct.getPrice());
+            preparedStatement.setString(5, updateProduct.getQuantity());
+            preparedStatement.setString(6, updateProduct.getCreatedAt().toString());
+            preparedStatement.setString(7, updateProduct.getUpdatedAt().toString());
+            preparedStatement.setInt(8, updateProduct.getStatus());
+            preparedStatement.setString(9, id);
             System.out.println("Connection success!");
             preparedStatement.execute();
-            return updateStudent;
+            return updateProduct;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -123,14 +124,14 @@ public class MySqlStudentModel implements StudentModel {
     }
 
     @Override
-    public boolean delete(String rollNumber) {
+    public boolean delete(String id) {
         try {
             Connection connection = ConnectionHelper.getConnection();
-            String sqlQuery = "update students " +
-                    "set status = ? where rollNumber = ?";
+            String sqlQuery = "update products " +
+                    "set status = ? where id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setInt(1, -1);
-            preparedStatement.setString(2, rollNumber);
+            preparedStatement.setString(2, id);
             System.out.println("Connection success!");
             preparedStatement.execute();
             return true;

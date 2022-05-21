@@ -1,8 +1,8 @@
 package com.example.customermanagement.productController;
 
-import com.t2010a.hellot2010aagain.entity.Student;
-import com.t2010a.hellot2010aagain.model.MySqlStudentModel;
-import com.t2010a.hellot2010aagain.model.StudentModel;
+import com.example.customermanagement.entity.Product;
+import com.example.customermanagement.productModel.MySqlProductModel;
+import com.example.customermanagement.productModel.ProductModel;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,43 +12,43 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class DetailStudentServlet extends HttpServlet {
+public class DetailProductServlet extends HttpServlet {
 
-    private StudentModel studentModel;
+    private ProductModel productModel;
 
-    public DetailStudentServlet() {
-        this.studentModel = new MySqlStudentModel();
+    public DetailProductServlet() {
+        this.productModel = new MySqlProductModel();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // lấy tham số rollNumber(id)
-        String rollNumber = req.getParameter("id");
+        String id = req.getParameter("id");
         // kiểm tra trong database xem có tồn tại không.
-        Student student = studentModel.findById(rollNumber);
+        Product product = productModel.findById(id);
         // nếu không trả về trang 404
-        if (student == null) {
-            req.setAttribute("message", "Student not found!");
+        if (product == null) {
+            req.setAttribute("message", "Product not found!");
             req.getRequestDispatcher("/admin/errors/404.jsp").forward(req, resp);
         } else {
             HttpSession session = req.getSession();
-            ArrayList<Student> recentView = (ArrayList<Student>) session.getAttribute("recentView");
+            ArrayList<Product> recentView = (ArrayList<Product>) session.getAttribute("recentView");
             if (recentView == null){
-                recentView = new ArrayList<Student>();
+                recentView = new ArrayList<Product>();
             }
             boolean exist = false;
             for (int i = 0; i < recentView.size(); i++) {
-                if (recentView.get(i).getRollNumber().equals(student.getRollNumber())){
+                if (recentView.get(i).getId().equals(product.getId())){
                     exist = true;
                 }
             }
             if (!exist){
-                recentView.add(student);
+                recentView.add(product);
                 session.setAttribute("recentView", recentView);
             }
             // nếu có trả về trang detail
-            req.setAttribute("student", student);
-            req.getRequestDispatcher("/admin/students/detail.jsp").forward(req, resp);
+            req.setAttribute("product", product);
+            req.getRequestDispatcher("/admin/products/detail.jsp").forward(req, resp);
         }
 
     }

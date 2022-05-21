@@ -1,8 +1,7 @@
-package com.example.customermanagement.model;
+package com.example.customermanagement.customerModel;
 
 import com.example.customermanagement.entity.Customer;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface CustomerModel {

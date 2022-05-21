@@ -1,4 +1,4 @@
-package com.example.customermanagement.model;
+package com.example.customermanagement.customerModel;
 
 import com.example.customermanagement.entity.Customer;
 import com.example.customermanagement.util.ConnectionHelper;

@@ -73,7 +73,7 @@
                                                                     </td>
                                                                     <td><%=st.getImage()%>
                                                                     </td>
-                                                                    <td><%=st.getDob()%>
+                                                                    <td><%=st.getJoinedAt()%>
                                                                     </td>
                                                                     <td><%=st.getStatus()%>
                                                                     </td>

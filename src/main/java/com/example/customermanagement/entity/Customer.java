@@ -15,6 +15,13 @@ public class Customer {
     private int status;
 
     public Customer() {
+        this.id = "";
+        this.name = "";
+        this.phone = "";
+        this.image = "";
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+        this.status =1;
     }
 
     public Customer(String id, String name, String phone, String image, LocalDateTime dob, LocalDateTime createdAt, LocalDateTime updatedAt, int status) {
@@ -40,6 +47,13 @@ public class Customer {
     }
 
     public Customer(String id, String name, String phone, String image) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.image = image;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+        this.status =1;
     }
 
     @Override
@@ -94,6 +108,13 @@ public class Customer {
 
     public void setDob(LocalDateTime dob) {
         this.dob = dob;
+    }
+
+    public String getJoinedAt() {
+        if (this.createdAt != null) {
+            return DateTimeHelper.convertLocalDateTimeToString(this.createdAt);
+        }
+        return "";
     }
 
     public LocalDateTime getCreatedAt() {

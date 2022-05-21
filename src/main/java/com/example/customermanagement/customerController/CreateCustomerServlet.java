@@ -1,8 +1,8 @@
-package com.example.customermanagement.controller;
+package com.example.customermanagement.customerController;
 
 import com.example.customermanagement.entity.Customer;
-import com.example.customermanagement.model.CustomerModel;
-import com.example.customermanagement.model.MySqlCustomerModel;
+import com.example.customermanagement.customerModel.CustomerModel;
+import com.example.customermanagement.customerModel.MySqlCustomerModel;
 import com.example.customermanagement.util.DateTimeHelper;
 
 import javax.servlet.ServletException;

@@ -1,5 +1,5 @@
-<%@ page import="com.example.customermanagement.entity.Customer" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.customermanagement.entity.Product" %><%--
   Created by IntelliJ IDEA.
   User: hp
   Date: 5/14/2022
@@ -8,12 +8,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    List<Customer> listCustomer = (List<Customer>)request.getAttribute("listCustomer");
+    List<Product> listProduct = (List<Product>)request.getAttribute("listProduct");
 %>
 <html>
 <jsp:include page="../includes/head.jsp"></jsp:include>
 <head>
-    <title>List customer</title>
+    <title>List product</title>
 </head>
 <body>
 <div id="pcoded" class="pcoded">
@@ -34,7 +34,7 @@
                                         <div class="col-sm-12">
                                             <!-- Basic Form Inputs card start -->
                                             <div class="card">
-                                                <h1>List student</h1>
+                                                <h1>List product</h1>
                                                 <div class="pcoded-search">
                                                     <div class="col-sm-3">
                                                         <span class="searchbar-toggle"></span>
@@ -45,7 +45,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <a class="col-sm-3" href="/admin/customers/create">Create new customer</a>
+                                                <a class="col-sm-3" href="/admin/products/create">Create new product</a>
                                                 <div class="card-block table-border-style">
                                                     <div class="table-responsive">
                                                         <table class="table">
@@ -53,36 +53,36 @@
                                                             <tr>
                                                                 <th>id</th>
                                                                 <th>Full name</th>
-                                                                <th>Phone number</th>
                                                                 <th>Images</th>
-                                                                <th>Date of birth</th>
+                                                                <th>Price</th>
+                                                                <th>Quantity</th>
                                                                 <th>Status</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                             </thead>
                                                             <ta>
                                                                     <%
-                                                        for (Customer st : listCustomer) {
+                                                        for (Product st : listProduct) {
                                                     %>
                                                                 <tr>
                                                                     <th scope="row"><%=st.getId()%>
                                                                     </th>
                                                                     <td><%=st.getName()%>
                                                                     </td>
-                                                                    <td><%=st.getPhone()%>
-                                                                    </td>
                                                                     <td><%=st.getImage()%>
                                                                     </td>
-                                                                    <td><%=st.getDob()%>
+                                                                    <td><%=st.getPrice()%>
+                                                                    </td>
+                                                                    <td><%=st.getQuantity()%>
                                                                     </td>
                                                                     <td><%=st.getStatus()%>
                                                                     </td>
                                                                     <td>
-                                                                        <a href="/admin/customers/detail?id=<%=st.getId()%>"><i
+                                                                        <a href="/admin/products/detail?id=<%=st.getId()%>"><i
                                                                                 class="fa-solid fa-circle-info"></i></a>
-                                                                        <a href="/admin/customers/edit?id=<%=st.getId()%>"><i
+                                                                        <a href="/admin/products/edit?id=<%=st.getId()%>"><i
                                                                                 class="fa-solid fa-pen-to-square"></i></a>
-                                                                        <a href="/admin/customers/delete?id=<%=st.getId()%>"
+                                                                        <a href="/admin/products/delete?id=<%=st.getId()%>"
                                                                            onclick="confirm('Are you sure?')"><i class="fa-solid fa-trash"></i></a>
                                                                     </td>
                                                                 </tr>
