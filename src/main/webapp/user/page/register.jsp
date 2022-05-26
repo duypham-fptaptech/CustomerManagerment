@@ -191,12 +191,12 @@
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-7">
-                                        <input type="text" name="password"
+                                        <input type="password" name="password"
                                                placeholder="Please enter password"
                                                class="form-control">
                                     </div>
                                     <div class="col-sm-5">
-                                        <input type="text" name="confirmPassword"
+                                        <input type="password" name="confirmPassword"
                                                placeholder="Please enter confirm password"
                                                class="form-control">
                                     </div>

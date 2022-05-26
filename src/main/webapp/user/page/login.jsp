@@ -156,7 +156,7 @@
                 <div class="card">
                     <div class="card-block">
                         <h1>Login</h1>
-                        <form action="/register" method="post">
+                        <form action="/login" method="post">
                             <%
                                 if(account.getListErrors().size() > 0){
                             %>
@@ -181,7 +181,7 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-12">
-                                    <input type="text" name="password"
+                                    <input type="password" name="password"
                                            placeholder="Please enter confirm password"
                                            class="form-control">
                                 </div>
