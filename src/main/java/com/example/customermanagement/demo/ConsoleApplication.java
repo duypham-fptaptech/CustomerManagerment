@@ -1,9 +1,9 @@
 package com.example.customermanagement.demo;
 
 import com.example.customermanagement.entity.Customer;
-import com.example.customermanagement.customerModel.CustomerModel;
-import com.example.customermanagement.customerModel.InMemoryCustomerModel;
-import com.example.customermanagement.customerModel.MySqlCustomerModel;
+import com.example.customermanagement.model.customerModel.CustomerModel;
+import com.example.customermanagement.model.customerModel.InMemoryCustomerModel;
+import com.example.customermanagement.model.customerModel.MySqlCustomerModel;
 
 import java.time.LocalDateTime;
 import java.util.List;

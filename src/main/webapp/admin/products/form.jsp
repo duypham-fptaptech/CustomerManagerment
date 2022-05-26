@@ -1,5 +1,8 @@
 <%@ page import="com.example.customermanagement.entity.Product" %>
-<%@ page import="java.util.HashMap" %><%--
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.customermanagement.entity.Category" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: hp
   Date: 5/14/2022
@@ -9,6 +12,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Product product = (Product) request.getAttribute("product");
+    List<Category> categories = (List<Category>) request.getAttribute("category");
+    if (categories == null){
+        categories = new ArrayList<>();
+    }
     int action = (int) request.getAttribute("action");
     HashMap<String, String> errors = (HashMap<String, String>) request.getAttribute("errors");
     String url = "/admin/products/create";
@@ -73,7 +80,7 @@
                                                             <div class="col-sm-5">
                                                                 <input type="text" name="id"
                                                                        placeholder="Please enter id"
-                                                                       class="form-control form-control-round"
+                                                                       class="form-control"
                                                                        value="<%=product.getId()%>" <%=action == 2 ? "readonly":""%>>
                                                                 <%if (errors.containsKey("id")) {%>
                                                                 <span class="text-danger">* <%=errors.get("id")%></span>
@@ -82,7 +89,7 @@
                                                             <div class="col-sm-7">
                                                                 <input type="text" name="name"
                                                                        placeholder="Please enter full name"
-                                                                       class="form-control form-control-round"
+                                                                       class="form-control"
                                                                        value="<%=product.getName()%>">
                                                                 <%if (errors.containsKey("name")) {%>
                                                                 <span class="text-danger">* <%=errors.get("name")%></span>
@@ -91,18 +98,18 @@
                                                         </div>
                                                         <div class="form-group row">
                                                             <div class="col-sm-7">
-                                                                <input type="text" name="image"
-                                                                       placeholder="Please enter image"
-                                                                       class="form-control form-control-round"
-                                                                       name="phone" value="<%=product.getImage()%>">
-                                                                <%if (errors.containsKey("image")) {%>
-                                                                <span class="text-danger">* <%=errors.get("image")%></span>
+                                                                <input type="text" name="description"
+                                                                       placeholder="Please enter description"
+                                                                       class="form-control"
+                                                                       value="<%=product.getDescription()%>">
+                                                                <%if (errors.containsKey("description")) {%>
+                                                                <span class="text-danger">* <%=errors.get("description")%></span>
                                                                 <%}%>
                                                             </div>
                                                             <div class="col-sm-5">
                                                                 <input type="text" name="price"
                                                                        placeholder="Please enter price"
-                                                                       class="form-control form-control-round"
+                                                                       class="form-control"
                                                                        value="<%=product.getPrice()%>">
                                                                 <%if (errors.containsKey("price")) {%>
                                                                 <span class="text-danger">* <%=errors.get("price")%></span>
@@ -110,14 +117,36 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <div class="col-sm-4">
-                                                                <input type="text" name="quantity"
-                                                                       placeholder="Please enter quantity"
-                                                                       class="form-control form-control-round"
-                                                                       data-target="#reservationdate"
-                                                                       value="<%=product.getQuantity()%>">
-                                                                <%if (errors.containsKey("quantity")) {%>
-                                                                <span class="text-danger">* <%=errors.get("quantity")%></span>
+                                                            <div class="col-sm-10">
+                                                                <select name="categoryId" class="form-control">
+                                                                    <option value="0">Tat ca</option>
+                                                                    <%
+                                                                        for (int i = 0; i < categories.size(); i++) {
+                                                                        %>
+                                                                    <option value="<%=categories.get(i).getId()%>"><%=categories.get(i).getName()%></option>
+                                                                    <%}%>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-12">
+                                                                <input type="text" name="image"
+                                                                       placeholder="Please enter image"
+                                                                       class="form-control"
+                                                                       name="phone" value="<%=product.getImage()%>">
+                                                                <%if (errors.containsKey("image")) {%>
+                                                                <span class="text-danger">* <%=errors.get("image")%></span>
+                                                                <%}%>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-sm-12">
+                                                                <input type="text" name="detail"
+                                                                       placeholder="Please enter detail"
+                                                                       class="form-control"
+                                                                       value="<%=product.getDetail()%>">
+                                                                <%if (errors.containsKey("detail")) {%>
+                                                                <span class="text-danger">* <%=errors.get("detail")%></span>
                                                                 <%}%>
                                                             </div>
                                                         </div>

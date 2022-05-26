@@ -39,10 +39,10 @@
                                                     <a href="/admin/customers/create">Create new customer</a>
                                                     <div class="form-group row">
                                                         <div class="col-sm-4">
-                                                            <div class="form-control form-control-round">
+                                                            <div class="form-control">
                                                                 Id: <%=customer.getId()%>
                                                             </div>
-                                                            <div class="form-control form-control-round">
+                                                            <div class="form-control">
                                                                 Fullname: <%=customer.getName()%>
                                                             </div>
                                                         </div>

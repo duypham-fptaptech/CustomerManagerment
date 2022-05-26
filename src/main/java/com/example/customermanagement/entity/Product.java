@@ -1,49 +1,69 @@
 package com.example.customermanagement.entity;
 
+import com.example.customermanagement.base.BaseEntity;
+import com.example.customermanagement.myEnum.ProductStatus;
+
 import java.time.LocalDateTime;
 
-public class Product {
+public class Product extends BaseEntity {
     private String id;
+    private int categoryId;
     private String name;
+    private String description;
+    private String detail;
     private String image;
-    private String price;
-    private String quantity;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private int status;
-
-    public Product(String id, String name, String image, String price, String quantity, LocalDateTime createdAt, LocalDateTime updatedAt, int status) {
-        this.id = id;
-        this.name = name;
-        this.image = image;
-        this.price = price;
-        this.quantity = quantity;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.status = status;
-    }
+    private double price;
+    private ProductStatus status;
 
     public Product() {
         this.id = "";
         this.name = "";
+        this.description = "";
+        this.detail = "";
         this.image = "";
-        this.price = "";
-        this.quantity = "";
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-        this.status =1;
+        this.setCreatedAt(LocalDateTime.now());
+        this.setUpdatedAt(LocalDateTime.now());
+        this.status = ProductStatus.ACTIVE;
     }
 
-    public Product(String id, String name, String image, String price, String quantity) {
+    public Product(String id, int categoryId, String name, String description, String detail, String image, double price) {
         this.id = id;
+        this.categoryId = categoryId;
         this.name = name;
+        this.description = description;
+        this.detail = detail;
         this.image = image;
         this.price = price;
-        this.quantity = quantity;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-        this.status =1;
+        this.setCreatedAt(LocalDateTime.now());
+        this.setUpdatedAt(LocalDateTime.now());
+        this.status = ProductStatus.ACTIVE;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + id + '\'' +
+                ", categoryId=" + categoryId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", detail='" + detail + '\'' +
+                ", image='" + image + '\'' +
+                ", price=" + price +
+                ", status=" + status +
+                '}';
+    }
+
+    //    public Product(String id, String name, String description, String detail, String image, Double price) {
+//        this.id = id;
+//        this.name = name;
+//        this.description = description;
+//        this.detail = detail;
+//        this.image = image;
+//        this.price = price;
+//        this.setCreatedAt(LocalDateTime.now());
+//        this.setUpdatedAt(LocalDateTime.now());
+//        this.status = ProductStatus.ACTIVE;
+//    }
 
     public String getId() {
         return id;
@@ -51,6 +71,14 @@ public class Product {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getName() {
@@ -61,6 +89,22 @@ public class Product {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
     public String getImage() {
         return image;
     }
@@ -69,43 +113,19 @@ public class Product {
         this.image = image;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public String getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public int getStatus() {
+    public ProductStatus getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(ProductStatus status) {
         this.status = status;
     }
 }
