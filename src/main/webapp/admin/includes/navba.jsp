@@ -8,7 +8,7 @@
             <a class="mobile-search morphsearch-search" href="#">
                 <i class="ti-search"></i>
             </a>
-            <a href="index.html">
+            <a href="/admin/customers/create">
                 <img class="img-fluid" src="${pageContext.request.contextPath}/resource/images/logo.png" alt="Theme-Logo"/>
             </a>
             <a class="mobile-options">

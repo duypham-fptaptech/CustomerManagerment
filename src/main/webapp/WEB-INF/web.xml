@@ -3,9 +3,64 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <filter>
+        <filter-name>HelloFilter</filter-name>
+        <filter-class>com.example.customermanagement.controller.filter.AdminFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HelloFilter</filter-name>
+        <url-pattern>/admin</url-pattern>
+        <url-pattern>/admin/*</url-pattern>
+        <url-pattern>/admin/*/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>UserFilter</filter-name>
+        <filter-class>com.example.customermanagement.controller.filter.UserFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <url-pattern>/user</url-pattern>
+        <url-pattern>/user/*</url-pattern>
+        <url-pattern>/user/*/*</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.example.customermanagement.controller.account.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.example.customermanagement.controller.account.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.example.customermanagement.controller.account.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>home</servlet-name>
+        <servlet-class>com.example.customermanagement.controller.userController.home</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>home</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>CreateStudentServlet</servlet-name>
-        <servlet-class>com.example.customermanagement.customerController.CreateCustomerServlet</servlet-class>
+        <servlet-class>com.example.customermanagement.controller.customerController.CreateCustomerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CreateStudentServlet</servlet-name>
@@ -13,7 +68,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>DeleteCustomerServlet</servlet-name>
-        <servlet-class>com.example.customermanagement.customerController.DeleteCustomerServlet</servlet-class>
+        <servlet-class>com.example.customermanagement.controller.customerController.DeleteCustomerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DeleteCustomerServlet</servlet-name>
@@ -21,7 +76,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>DetailCustomerServlet</servlet-name>
-        <servlet-class>com.example.customermanagement.customerController.DetailCustomerServlet</servlet-class>
+        <servlet-class>com.example.customermanagement.controller.customerController.DetailCustomerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DetailCustomerServlet</servlet-name>
@@ -29,7 +84,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>EditCustomerServlet</servlet-name>
-        <servlet-class>com.example.customermanagement.customerController.EditCustomerServlet</servlet-class>
+        <servlet-class>com.example.customermanagement.controller.customerController.EditCustomerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EditCustomerServlet</servlet-name>
@@ -37,7 +92,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>ListCustomerServlet</servlet-name>
-        <servlet-class>com.example.customermanagement.customerController.ListCustomerServlet</servlet-class>
+        <servlet-class>com.example.customermanagement.controller.customerController.ListCustomerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ListCustomerServlet</servlet-name>
@@ -47,7 +102,7 @@
     
     <servlet>
         <servlet-name>CreateProductServlet</servlet-name>
-        <servlet-class>com.example.customermanagement.productController.CreateProductServlet</servlet-class>
+        <servlet-class>com.example.customermanagement.controller.productController.CreateProductServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CreateProductServlet</servlet-name>
@@ -55,7 +110,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>DeleteProductServlet</servlet-name>
-        <servlet-class>com.example.customermanagement.productController.DeleteProductServlet</servlet-class>
+        <servlet-class>com.example.customermanagement.controller.productController.DeleteProductServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DeleteProductServlet</servlet-name>
@@ -63,7 +118,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>DetailProductServlet</servlet-name>
-        <servlet-class>com.example.customermanagement.productController.DetailProductServlet</servlet-class>
+        <servlet-class>com.example.customermanagement.controller.productController.DetailProductServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DetailProductServlet</servlet-name>
@@ -71,7 +126,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>EditProductServlet</servlet-name>
-        <servlet-class>com.example.customermanagement.productController.EditProductServlet</servlet-class>
+        <servlet-class>com.example.customermanagement.controller.productController.EditProductServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>EditProductServlet</servlet-name>
@@ -79,10 +134,12 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>ListProductServlet</servlet-name>
-        <servlet-class>com.example.customermanagement.productController.ListProductServlet</servlet-class>
+        <servlet-class>com.example.customermanagement.controller.productController.ListProductServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ListProductServlet</servlet-name>
         <url-pattern>/admin/products/list</url-pattern>
     </servlet-mapping>
+
+
 </web-app>

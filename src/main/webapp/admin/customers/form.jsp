@@ -73,7 +73,7 @@
                                                             <div class="col-sm-5">
                                                                 <input type="text" name="id"
                                                                        placeholder="Please enter id"
-                                                                       class="form-control form-control-round"
+                                                                       class="form-control"
                                                                        value="<%=customer.getId()%>" <%=action == 2 ? "readonly":""%>>
                                                                 <%if (errors.containsKey("id")) {%>
                                                                 <span class="text-danger">* <%=errors.get("id")%></span>
@@ -82,7 +82,7 @@
                                                             <div class="col-sm-7">
                                                                 <input type="text" name="name"
                                                                        placeholder="Please enter full name"
-                                                                       class="form-control form-control-round"
+                                                                       class="form-control"
                                                                        value="<%=customer.getName()%>">
                                                                 <%if (errors.containsKey("name")) {%>
                                                                 <span class="text-danger">* <%=errors.get("name")%></span>
@@ -93,7 +93,7 @@
                                                             <div class="col-sm-7">
                                                                 <input type="text" name="phone"
                                                                        placeholder="Please enter image"
-                                                                       class="form-control form-control-round"
+                                                                       class="form-control"
                                                                        name="phone" value="<%=customer.getPhone()%>">
                                                                 <%if (errors.containsKey("phone")) {%>
                                                                 <span class="text-danger">* <%=errors.get("phone")%></span>
@@ -102,7 +102,7 @@
                                                             <div class="col-sm-5">
                                                                 <input type="text" name="image"
                                                                        placeholder="Please enter phone number"
-                                                                       class="form-control form-control-round"
+                                                                       class="form-control"
                                                                        value="<%=customer.getImage()%>">
                                                                 <%if (errors.containsKey("image")) {%>
                                                                 <span class="text-danger">* <%=errors.get("image")%></span>
@@ -113,12 +113,9 @@
                                                             <div class="col-sm-4" id="reservationdate"
                                                                  data-target-input="nearest">
                                                                 <input type="date" name="dob"
-                                                                       class="form-control form-control-round"
+                                                                       class="form-control"
                                                                        data-target="#reservationdate"
                                                                        value="<%=customer.getDob()%>">
-                                                                <%if (errors.containsKey("dob")) {%>
-                                                                <span class="text-danger">* <%=errors.get("dob")%></span>
-                                                                <%}%>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
@@ -142,12 +139,12 @@
     </div>
 </div>
 <jsp:include page="../includes/script.jsp"></jsp:include>
-<script>
-    document.addEventListener('DOMContentLoaded', function (){
-        $('#reservationdate').datetimepicker({
-            format: 'YYYY-MM-DD'
-        });
-    })
-</script>
+<%--<script>--%>
+<%--    document.addEventListener('DOMContentLoaded', function (){--%>
+<%--        $('#reservationdate').datetimepicker({--%>
+<%--            format: 'YYYY-MM-DD'--%>
+<%--        });--%>
+<%--    })--%>
+<%--</script>--%>
 </body>
 </html>

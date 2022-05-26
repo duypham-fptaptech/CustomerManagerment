@@ -55,8 +55,6 @@
                                                                 <th>Full name</th>
                                                                 <th>Images</th>
                                                                 <th>Price</th>
-                                                                <th>Quantity</th>
-                                                                <th>Status</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                             </thead>
@@ -69,13 +67,10 @@
                                                                     </th>
                                                                     <td><%=st.getName()%>
                                                                     </td>
-                                                                    <td><%=st.getImage()%>
+                                                                    <td>
+                                                                        <img class="img-thumbnail" src="<%=st.getImage()%>" alt="" width="150px">
                                                                     </td>
                                                                     <td><%=st.getPrice()%>
-                                                                    </td>
-                                                                    <td><%=st.getQuantity()%>
-                                                                    </td>
-                                                                    <td><%=st.getStatus()%>
                                                                     </td>
                                                                     <td>
                                                                         <a href="/admin/products/detail?id=<%=st.getId()%>"><i

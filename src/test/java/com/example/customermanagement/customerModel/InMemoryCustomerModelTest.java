@@ -1,6 +1,7 @@
 package com.example.customermanagement.customerModel;
 
 import com.example.customermanagement.entity.Customer;
+import com.example.customermanagement.model.customerModel.InMemoryCustomerModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

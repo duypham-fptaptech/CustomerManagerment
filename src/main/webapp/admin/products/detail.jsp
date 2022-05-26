@@ -40,14 +40,15 @@
                                                     <a href="/admin/products/create">Create new product</a>
                                                     <div class="form-group row">
                                                         <div class="col-sm-4">
-                                                            <div class="form-control form-control-round">
+                                                            <div class="form-control">
                                                                 Id: <%=product.getId()%>
                                                             </div>
-                                                            <div class="form-control form-control-round">
+                                                            <div class="form-control">
                                                                 Name: <%=product.getName()%>
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
