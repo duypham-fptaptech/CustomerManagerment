@@ -28,6 +28,8 @@
 %>
 <html>
 <jsp:include page="../includes/head.jsp"></jsp:include>
+<script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
+<script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
 <head>
     <title>Create new product</title>
 </head>
@@ -75,17 +77,8 @@
                                                 <div class="card-block">
                                                     <h1>Create product</h1>
                                                     <a href="/admin/products/list">Back to list</a>
-                                                    <form action="<%=url%>" method="post">
+                                                    <form action="<%=url%>" method="post" name="product-form">
                                                         <div class="form-group row">
-                                                            <div class="col-sm-5">
-                                                                <input type="text" name="id"
-                                                                       placeholder="Please enter id"
-                                                                       class="form-control"
-                                                                       value="<%=product.getId()%>" <%=action == 2 ? "readonly":""%>>
-                                                                <%if (errors.containsKey("id")) {%>
-                                                                <span class="text-danger">* <%=errors.get("id")%></span>
-                                                                <%}%>
-                                                            </div>
                                                             <div class="col-sm-7">
                                                                 <input type="text" name="name"
                                                                        placeholder="Please enter full name"
@@ -93,17 +86,6 @@
                                                                        value="<%=product.getName()%>">
                                                                 <%if (errors.containsKey("name")) {%>
                                                                 <span class="text-danger">* <%=errors.get("name")%></span>
-                                                                <%}%>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-7">
-                                                                <input type="text" name="description"
-                                                                       placeholder="Please enter description"
-                                                                       class="form-control"
-                                                                       value="<%=product.getDescription()%>">
-                                                                <%if (errors.containsKey("description")) {%>
-                                                                <span class="text-danger">* <%=errors.get("description")%></span>
                                                                 <%}%>
                                                             </div>
                                                             <div class="col-sm-5">
@@ -117,34 +99,35 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <div class="col-sm-10">
+                                                            <div class="col-sm-5">
                                                                 <select name="categoryId" class="form-control">
                                                                     <option value="0">Tat ca</option>
                                                                     <%
                                                                         for (int i = 0; i < categories.size(); i++) {
-                                                                        %>
+                                                                    %>
                                                                     <option value="<%=categories.get(i).getId()%>"><%=categories.get(i).getName()%></option>
                                                                     <%}%>
                                                                 </select>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <div class="col-sm-12">
-                                                                <input type="text" name="image"
-                                                                       placeholder="Please enter image"
+                                                            <div class="col-sm-7">
+                                                                <input type="text" name="description"
+                                                                       placeholder="Please enter description"
                                                                        class="form-control"
-                                                                       name="phone" value="<%=product.getImage()%>">
-                                                                <%if (errors.containsKey("image")) {%>
-                                                                <span class="text-danger">* <%=errors.get("image")%></span>
+                                                                       value="<%=product.getDescription()%>">
+                                                                <%if (errors.containsKey("description")) {%>
+                                                                <span class="text-danger">* <%=errors.get("description")%></span>
                                                                 <%}%>
                                                             </div>
                                                         </div>
+                                                        <div class="form-group">
+                                                            <strong><label>Image</label></strong>
+                                                            <input type="hidden" class="form-control" id="hello" name="image">
+                                                            <button type="button" id="upload_widgetn" class="btn btn-sm btn-primary">Chọn ảnh</button>
+                                                            <img id="preview-image" style="display: none" src="" alt="" class="img-bordered mt-2" width="200px">
+                                                        </div>
                                                         <div class="form-group row">
-                                                            <div class="col-sm-12">
-                                                                <input type="text" name="detail"
-                                                                       placeholder="Please enter detail"
-                                                                       class="form-control"
-                                                                       value="<%=product.getDetail()%>">
+                                                            <div class="col-sm-12" >
+                                                                <textarea id="editor1" name="detail"><%=product.getDetail()%></textarea>
                                                                 <%if (errors.containsKey("detail")) {%>
                                                                 <span class="text-danger">* <%=errors.get("detail")%></span>
                                                                 <%}%>
@@ -170,6 +153,47 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    var myWidget = cloudinary.createUploadWidget({
+            cloudName: 'duypdth',
+            uploadPreset: 'zyt6qk4h'
+        }, (error, result) => {
+            if (!error && result && result.event === "success") {
+                console.log('Done! Here is the image info: ', result.info.secure_url);
+                document.forms['product-form']['image'].value = result.info.secure_url;
+                document.getElementById('preview-image').src = result.info.secure_url;
+                document.getElementById('preview-image').style.display = "inline-block";
+            }
+        }
+    )
+    document.getElementById("upload_widgetn").addEventListener("click", function () {
+        myWidget.open();
+    }, false);
+</script>
+<script>
+    CKEDITOR.replace('editor1');
+</script>
+
+<%--<script>--%>
+<%--    document.addEventListener('DOMContentLoaded', function (){--%>
+<%--        $('#summernote').summernote();--%>
+<%--        var myWidget = cloudinary.createUploadWidget({--%>
+<%--                cloudName: 'duypdth',--%>
+<%--                uploadPreset: 'zyt6qk4h'}, (error, result) => {--%>
+<%--                if (!error && result && result.event === "success") {--%>
+<%--                    console.log('Done! Here is the image info: ', result.info.secure_url);--%>
+<%--                    document.forms['product-form']['image'].value = result.info.secure_url;--%>
+<%--                    document.getElementById('preview-image').src = result.info.secure_url;--%>
+<%--                    document.getElementById('preview-image').style.display = "block";--%>
+<%--                }--%>
+<%--            }--%>
+<%--        )--%>
+
+<%--        document.getElementById("upload_widget").addEventListener("click", function(){--%>
+<%--            myWidget.open();--%>
+<%--        }, false);--%>
+<%--    })--%>
+<%--</script>--%>
 <jsp:include page="../includes/script.jsp"></jsp:include>
 </body>
 </html>

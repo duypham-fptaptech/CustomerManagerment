@@ -26,7 +26,7 @@ public class EditProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("category", categoryModel.findAll());
         // lấy tham số rollNumber(id)
-        String id = req.getParameter("id");
+        int id = Integer.parseInt(req.getParameter("id"));
         // kiểm tra trong database xem có tồn tại không.
         Product product = productModel.findById(id);
         // nếu không trả về trang 404
@@ -45,7 +45,7 @@ public class EditProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         // xử lý validate và save.
-        String id = req.getParameter("id");
+        int id = Integer.parseInt(req.getParameter("id"));
         Product existingProduct = productModel.findById(id);
         if(existingProduct == null){
             req.setAttribute("message", "Product not found!");

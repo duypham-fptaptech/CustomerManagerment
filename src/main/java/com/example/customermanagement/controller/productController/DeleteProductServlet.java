@@ -21,7 +21,7 @@ public class DeleteProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // lấy tham số rollNumber(id)
-        String id = req.getParameter("id");
+        int id = Integer.parseInt(req.getParameter("id"));
         // kiểm tra trong database xem có tồn tại không.
         Product product = productModel.findById(id);
         // nếu không trả về trang 404

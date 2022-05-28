@@ -9,9 +9,9 @@ public interface ProductModel {
 
     List<Product> findAll();
 
-    Product findById(String id);
+    Product findById(int id);
 
-    Product update(String id, Product updateProduct);
+    Product update(int id, Product updateProduct);
 
-    boolean delete(String id);
+    boolean delete(int id);
 }

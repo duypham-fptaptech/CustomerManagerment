@@ -6,7 +6,7 @@ import com.example.customermanagement.myEnum.ProductStatus;
 import java.time.LocalDateTime;
 
 public class Product extends BaseEntity {
-    private String id;
+    private int id;
     private int categoryId;
     private String name;
     private String description;
@@ -16,7 +16,6 @@ public class Product extends BaseEntity {
     private ProductStatus status;
 
     public Product() {
-        this.id = "";
         this.name = "";
         this.description = "";
         this.detail = "";
@@ -26,7 +25,7 @@ public class Product extends BaseEntity {
         this.status = ProductStatus.ACTIVE;
     }
 
-    public Product(String id, int categoryId, String name, String description, String detail, String image, double price) {
+    public Product(int id, int categoryId, String name, String description, String detail, String image, double price) {
         this.id = id;
         this.categoryId = categoryId;
         this.name = name;
@@ -65,11 +64,11 @@ public class Product extends BaseEntity {
 //        this.status = ProductStatus.ACTIVE;
 //    }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

@@ -24,7 +24,7 @@ public class MySqlProductModel implements ProductModel {
                     "values " +
                     "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-            preparedStatement.setString(1, product.getId());
+            preparedStatement.setInt(1, product.getId());
             preparedStatement.setInt(2, product.getCategoryId());
             preparedStatement.setString(3, product.getName());
             preparedStatement.setString(4, product.getDescription());
@@ -54,7 +54,7 @@ public class MySqlProductModel implements ProductModel {
             System.out.println("Connection success!");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                String id = resultSet.getString("id");
+                int id = resultSet.getInt("id");
                 int categoryId = Integer.parseInt(resultSet.getString("categoryId"));
                 String name = resultSet.getString("name");
                 String description = resultSet.getString("description");
@@ -86,14 +86,14 @@ public class MySqlProductModel implements ProductModel {
     }
 
     @Override
-    public Product findById(String id) {
+    public Product findById(int id) {
         Product product = null;
         try {
             Connection connection = ConnectionHelper.getConnection();
             String sqlQuery = "select * from products where status = ? and id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setInt(1, ProductStatus.ACTIVE.getValue());
-            preparedStatement.setString(2, id);
+            preparedStatement.setInt(2, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 int categoryId = Integer.parseInt(resultSet.getString("categoryId"));
@@ -126,13 +126,13 @@ public class MySqlProductModel implements ProductModel {
     }
 
     @Override
-    public Product update(String id, Product updateProduct) {
+    public Product update(int id, Product updateProduct) {
         try {
             Connection connection = ConnectionHelper.getConnection();
             String sqlQuery = "update products " +
                     "set id = ?, categoryId = ?, name = ?, description = ?, detail = ?, image = ?, price = ?, createdAt = ?, updatedAt = ?, status = ? where id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-            preparedStatement.setString(1, updateProduct.getId());
+            preparedStatement.setInt(1, updateProduct.getId());
             preparedStatement.setInt(2, updateProduct.getCategoryId());
             preparedStatement.setString(3, updateProduct.getName());
             preparedStatement.setString(4, updateProduct.getDescription());
@@ -142,7 +142,7 @@ public class MySqlProductModel implements ProductModel {
             preparedStatement.setString(8, updateProduct.getCreatedAt().toString());
             preparedStatement.setString(9, updateProduct.getUpdatedAt().toString());
             preparedStatement.setInt(10, updateProduct.getStatus().getValue());
-            preparedStatement.setString(11, id);
+            preparedStatement.setInt(11, id);
             System.out.println("Connection success!");
             preparedStatement.execute();
             return updateProduct;
@@ -153,14 +153,14 @@ public class MySqlProductModel implements ProductModel {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(int id) {
         try {
             Connection connection = ConnectionHelper.getConnection();
             String sqlQuery = "update products " +
                     "set status = ? where id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
             preparedStatement.setInt(1, ProductStatus.DELETED.getValue());
-            preparedStatement.setString(2, id);
+            preparedStatement.setInt(2, id);
             System.out.println("Connection success!");
             preparedStatement.execute();
             return true;

@@ -14,3 +14,4 @@
 <link rel="stylesheet" type="text/css"
       href="${pageContext.request.contextPath}/resource/css/jquery.mCustomScrollbar.css">
 <link rel="icon" href="${pageContext.request.contextPath}/resource/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resource/summernote/summernote-bs4.min.css">

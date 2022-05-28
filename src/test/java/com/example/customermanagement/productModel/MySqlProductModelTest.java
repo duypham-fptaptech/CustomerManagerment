@@ -18,7 +18,7 @@ class MySqlProductModelTest {
     @Test
     void save() {
         Product product = new Product();
-        product.setId("A007");
+        product.setId(1);
         product.setCategoryId(1);
         product.setDescription("name");
         product.setDetail("name");

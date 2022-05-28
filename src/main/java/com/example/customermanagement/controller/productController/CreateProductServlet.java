@@ -37,7 +37,7 @@ public class CreateProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         // xử lý validate và save.
-        String id = req.getParameter("id");
+        int id = Integer.parseInt(req.getParameter("id"));
         int categoryId = Integer.parseInt(req.getParameter("categoryId"));
         String name = req.getParameter("name");
         String description = req.getParameter("description");
@@ -48,9 +48,6 @@ public class CreateProductServlet extends HttpServlet {
         Product product = new Product(id, categoryId, name, description, detail, image, price);
         HashMap<String, String> errors = new HashMap<>();
         // validate dữ liệu theo kiểu cùi bắp.
-        if (id == null || id.length() == 0) {
-            errors.put("id", "Please enter id");
-        }
         if (name == null || name.length() == 0) {
             errors.put("name", "Please enter name");
         }

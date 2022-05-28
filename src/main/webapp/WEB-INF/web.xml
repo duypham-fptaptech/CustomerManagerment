@@ -48,6 +48,23 @@
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ListAccount</servlet-name>
+        <servlet-class>com.example.customermanagement.controller.account.ListAccount</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListAccount</servlet-name>
+        <url-pattern>/admin/accounts/list</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DeleteAccount</servlet-name>
+        <servlet-class>com.example.customermanagement.controller.account.DeleteAccount</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteAccount</servlet-name>
+        <url-pattern>/admin/accounts/delete</url-pattern>
+    </servlet-mapping>
+
     
     <servlet>
         <servlet-name>home</servlet-name>
@@ -57,6 +74,23 @@
         <servlet-name>home</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>cart</servlet-name>
+        <servlet-class>com.example.customermanagement.controller.userController.CartShow</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>cart</servlet-name>
+        <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddToCart</servlet-name>
+        <servlet-class>com.example.customermanagement.controller.userController.AddToCart</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddToCart</servlet-name>
+        <url-pattern>/cart/add</url-pattern>
+    </servlet-mapping>
+
 
     <servlet>
         <servlet-name>CreateStudentServlet</servlet-name>
