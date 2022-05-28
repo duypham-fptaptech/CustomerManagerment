@@ -23,7 +23,7 @@ public class DetailProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // lấy tham số rollNumber(id)
-        String id = req.getParameter("id");
+       int id = Integer.parseInt(req.getParameter("id"));
         // kiểm tra trong database xem có tồn tại không.
         Product product = productModel.findById(id);
         // nếu không trả về trang 404
@@ -35,16 +35,6 @@ public class DetailProductServlet extends HttpServlet {
             ArrayList<Product> recentView = (ArrayList<Product>) session.getAttribute("recentView");
             if (recentView == null){
                 recentView = new ArrayList<Product>();
-            }
-            boolean exist = false;
-            for (int i = 0; i < recentView.size(); i++) {
-                if (recentView.get(i).getId().equals(product.getId())){
-                    exist = true;
-                }
-            }
-            if (!exist){
-                recentView.add(product);
-                session.setAttribute("recentView", recentView);
             }
             // nếu có trả về trang detail
             req.setAttribute("product", product);
